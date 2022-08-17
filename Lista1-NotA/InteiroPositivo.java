@@ -16,16 +16,16 @@ public class InteiroPositivo
             this.x = valor;
         }
     }
-    
+
     public int getValor(){
         return this.x;
     }
-    
+
     // item b
     public long multiplicar(InteiroPositivo outro){
         return this.x * outro.getValor();
     }
-    
+
     // item c
     public long fatorial(){
         long fat = 1;
@@ -34,7 +34,7 @@ public class InteiroPositivo
         }
         return fat;
     }
-    
+
     // item d
     public String divisoresInteiros(){
         int contador = 0;
@@ -47,5 +47,20 @@ public class InteiroPositivo
         }
         str += " e a quantidade de divisores é " + contador;
         return str;
+    }
+
+    // item e
+    public int[] fibonacci(){
+        int[] vetor = new int[this.x];
+        if (vetor.length > 0){
+            vetor[0] = 1;
+            if (vetor.length > 1){
+                vetor[1] = 1;
+            }
+        }
+        for (int i = 2; i < vetor.length; i++){
+            vetor[i] = vetor[i-1] + vetor[i-2];
+        }
+        return vetor;
     }
 }
