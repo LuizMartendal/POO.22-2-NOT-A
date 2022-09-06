@@ -38,13 +38,14 @@ public class InteiroPositivo
     // item d
     public String divisoresInteiros(){
         int contador = 0;
-        String str = "Os divisores são ";
+        String str = "Os divisores inteiros são ";
         for(int i = 1; i <= this.x; i++){
             if(this.x%i == 0){
-                str += i+", ";
+                str += i+",";
                 contador++;
             }
         }
+        str = str.substring(0,str.length()-1);
         str += " e a quantidade de divisores é " + contador;
         return str;
     }
