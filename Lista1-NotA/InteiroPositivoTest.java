@@ -42,4 +42,29 @@ public class InteiroPositivoTest
         assertEquals("Os divisores inteiros são 1,2,3,6,9,18 e a quantidade de divisores é 6", 
                         ip.divisoresInteiros());
     }   
+    
+    @Test
+    public void test05_Valor_9_Fibonacci(){
+        //Arrange
+        InteiroPositivo ip = new InteiroPositivo();
+        ip.setValor(9);
+        int[] resultadoEsperado =  {1, 1, 2, 3, 5, 8, 13, 21, 34};
+        
+        // Act
+        int[] resultadoReal = ip.fibonacci();
+        
+        // Assert
+        assertArrayEquals(resultadoEsperado, resultadoReal);
+    }   
+    
+        @Test
+    public void test06_Valor_15_Fibonacci(){
+        //Arrange
+        InteiroPositivo ip = new InteiroPositivo();
+        ip.setValor(15);
+        int[] resultadoEsperado =  {1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610};
+        
+        // Act & Assert
+        assertArrayEquals(resultadoEsperado,ip.fibonacci());
+    }  
 }
