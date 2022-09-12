@@ -20,9 +20,11 @@ public class Apresentacao {
 	private JTextField tfConsulta;
 	private JTextField tfCPFConsulta;
 	// estruturas de dados para guardar os contribuintes cadastrados.
-	// Normalmente se usa apenas a mais adequada ao problema. Aqui usaremos ambas para exemplificar.
+	// Normalmente se usa apenas a mais adequada ao problema. Aqui usaremos ambas
+	// para exemplificar.
 	private ArrayList<Contribuinte> contribuintes = new ArrayList<>();
 	private HashMap<String, Contribuinte> hashContrib = new HashMap<>();
+
 	/**
 	 * Launch the application.
 	 */
@@ -54,87 +56,81 @@ public class Apresentacao {
 		frame.setBounds(100, 100, 450, 328);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("Nome do contribuinte:");
 		lblNewLabel.setBounds(10, 22, 139, 14);
 		frame.getContentPane().add(lblNewLabel);
-		
+
 		tfNome = new JTextField();
 		tfNome.setBounds(158, 19, 218, 20);
 		frame.getContentPane().add(tfNome);
 		tfNome.setColumns(10);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("CPF:");
 		lblNewLabel_1.setBounds(10, 57, 46, 14);
 		frame.getContentPane().add(lblNewLabel_1);
-		
+
 		tfCPF = new JTextField();
 		tfCPF.setBounds(158, 50, 86, 20);
 		frame.getContentPane().add(tfCPF);
 		tfCPF.setColumns(10);
-		
+
 		JLabel lblNewLabel_2 = new JLabel("Estado (UF):");
 		lblNewLabel_2.setBounds(10, 88, 86, 14);
 		frame.getContentPane().add(lblNewLabel_2);
-		
+
 		tfUF = new JTextField();
 		tfUF.setBounds(158, 81, 46, 20);
 		frame.getContentPane().add(tfUF);
 		tfUF.setColumns(10);
-		
+
 		JLabel lblNewLabel_3 = new JLabel("Renda anual: R$");
 		lblNewLabel_3.setBounds(10, 113, 99, 14);
 		frame.getContentPane().add(lblNewLabel_3);
-		
+
 		tfRenda = new JTextField();
 		tfRenda.setBounds(158, 110, 86, 20);
 		frame.getContentPane().add(tfRenda);
 		tfRenda.setColumns(10);
-		
+
 		JButton btnInserir = new JButton("Inserir");
 		btnInserir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Contribuinte c;
-				c = new Contribuinte(tfNome.getText(), 
-									tfCPF.getText(),
-									tfUF.getText(),
-									Double.parseDouble(tfRenda.getText()));
+				c = new Contribuinte(tfNome.getText(), tfCPF.getText(), tfUF.getText(),
+						Double.parseDouble(tfRenda.getText()));
 				double imposto = c.calcularImposto();
-				String msg = "Contribuinte "+c.getNome()
-							 +", CPF:"+c.getCpf()
-							 +" pagará R$"+imposto;
+				String msg = "Contribuinte " + c.getNome() + ", CPF:" + c.getCpf() + " pagará R$" + imposto;
 				JOptionPane.showMessageDialog(frame, msg);
-				
+
 				// guardando nas estruturas de dados
 				contribuintes.add(c);
-				hashContrib.put(c.getCpf(),c);
+				hashContrib.put(c.getCpf(), c);
 			}
 		});
 		btnInserir.setBounds(158, 141, 89, 23);
 		frame.getContentPane().add(btnInserir);
-		
+
 		JLabel lblNewLabel_4 = new JLabel("Valor do imposto a consultar: R$");
 		lblNewLabel_4.setBounds(10, 208, 194, 14);
 		frame.getContentPane().add(lblNewLabel_4);
-		
+
 		tfConsulta = new JTextField();
 		tfConsulta.setBounds(214, 205, 86, 20);
 		frame.getContentPane().add(tfConsulta);
 		tfConsulta.setColumns(10);
-		
+
 		JButton btnConsultar = new JButton("Consultar");
 		btnConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double impostoAConsultar = Double.parseDouble(tfConsulta.getText());
-				String exibicao = "Contribuintes com imposto acima de R$"
-									+impostoAConsultar+"\n";
-				
-				for (int i=0; i < contribuintes.size(); i++) {
+				String exibicao = "Contribuintes com imposto acima de R$" + impostoAConsultar + "\n";
+
+				for (int i = 0; i < contribuintes.size(); i++) {
 					Contribuinte c = contribuintes.get(i);
 					if (c.calcularImposto() > impostoAConsultar) {
-						exibicao += "\n"+c.getNome()+", CPF:"+c.getCpf()
-									+" Renda "+c.getRendaAnual()
-									+" Imposto "+c.calcularImposto();
+						exibicao += "\n" + c.getNome() + ", CPF:" + c.getCpf() + " Renda " + c.getRendaAnual()
+								+ " Imposto " + c.calcularImposto();
 					}
 				}
 				JOptionPane.showMessageDialog(frame, exibicao);
@@ -142,48 +138,92 @@ public class Apresentacao {
 		});
 		btnConsultar.setBounds(311, 204, 89, 23);
 		frame.getContentPane().add(btnConsultar);
-		
+
 		JLabel lblNewLabel_5 = new JLabel("CPF a consultar:");
 		lblNewLabel_5.setBounds(10, 239, 139, 14);
 		frame.getContentPane().add(lblNewLabel_5);
-		
+
 		tfCPFConsulta = new JTextField();
 		tfCPFConsulta.setBounds(214, 236, 86, 20);
 		frame.getContentPane().add(tfCPFConsulta);
 		tfCPFConsulta.setColumns(10);
-		
+
 		JButton btnConsultarCPF = new JButton("ConsultarCPF");
 		btnConsultarCPF.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String exibicao = "CPF nao encontrado";
-				//buscando no ArrayList, usando for-each
-				for (Contribuinte c: contribuintes) {
+				// buscando no ArrayList, usando for-each
+				for (Contribuinte c : contribuintes) {
 					if (c.getCpf().equals(tfCPFConsulta.getText())) {
-						exibicao = "ArrayList:"+c.getNome()+", CPF:"+c.getCpf()
-									+" Renda "+c.getRendaAnual()
-									+" Imposto "+c.calcularImposto();
+						exibicao = "ArrayList:" + c.getNome() + ", CPF:" + c.getCpf() + " Renda " + c.getRendaAnual()
+								+ " Imposto " + c.calcularImposto();
 					}
 				}
 				JOptionPane.showMessageDialog(frame, exibicao);
-				
-				//buscando no HashMap
+
+				// buscando no HashMap
 				Contribuinte c = hashContrib.get(tfCPFConsulta.getText());
 				if (c == null) {
 					exibicao = "HashMap: CPF nao encontrado";
-				}
-				else {
-					exibicao = "HashMap:"+c.getNome()+", CPF:"+c.getCpf()
-								+" Renda "+c.getRendaAnual()
-								+" Imposto "+c.calcularImposto();
+				} else {
+					exibicao = "HashMap:" + c.getNome() + ", CPF:" + c.getCpf() + " Renda " + c.getRendaAnual()
+							+ " Imposto " + c.calcularImposto();
 				}
 				JOptionPane.showMessageDialog(frame, exibicao);
 			}
 		});
 		btnConsultarCPF.setBounds(311, 238, 89, 23);
 		frame.getContentPane().add(btnConsultarCPF);
-		
+
 		JButton btnParticipacao = new JButton("Participa\u00E7\u00E3o %");
+		btnParticipacao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				double impostosSC = 0.0;
+				double impostosRS = 0.0;
+				double impostosPR = 0.0;
+				for (Contribuinte c : contribuintes) {
+					if (c.getUf().trim().equalsIgnoreCase("SC")) {
+						impostosSC += c.calcularImposto();
+					} else if (c.getUf().trim().equalsIgnoreCase("RS")) {
+						impostosRS += c.calcularImposto();
+					} else {
+						impostosPR += c.calcularImposto();
+					}
+				}
+				double totalImpostos = impostosSC + impostosRS + impostosPR;
+				String exibicao = "Porcentagem PR: " + (impostosPR / totalImpostos) * 100 + "%" + "\n"
+						+ "Porcentagem SC: " + (impostosSC / totalImpostos) * 100 + "%" + "\n" 
+						+ "Porcentagem RS: " + (impostosRS / totalImpostos) * 100 + "%" + "\n";
+				JOptionPane.showMessageDialog(frame, exibicao);
+			}
+		});
 		btnParticipacao.setBounds(311, 169, 113, 23);
 		frame.getContentPane().add(btnParticipacao);
+		
+		JButton btnPartHash = new JButton("Participa\u00E7\u00E3o %Hash");
+		btnPartHash.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				HashMap<String, Double> totais = new HashMap<>();
+				double totalImpostos=0;
+				for (Contribuinte c : contribuintes) {
+					double valor = 0;
+					if (totais.containsKey(c.getUf())) {
+						valor = totais.get(c.getUf());
+					}
+					valor += c.calcularImposto();
+					totalImpostos += c.calcularImposto();
+					totais.put(c.getUf(),valor);
+				}
+				
+				String exibicao="";
+				for (String uf:totais.keySet()) {
+					double valor = totais.get(uf);
+					 exibicao += "\nPorcentagem "+uf+": " + (valor / totalImpostos) * 100 + "% = R$"+valor;
+				}
+				JOptionPane.showMessageDialog(frame, exibicao);
+			}
+		});
+		btnPartHash.setBounds(311, 141, 113, 23);
+		frame.getContentPane().add(btnPartHash);
 	}
 }
