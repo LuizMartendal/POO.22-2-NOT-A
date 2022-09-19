@@ -19,6 +19,10 @@ public class DataAgenda {
 		this.efemeride = efemeride;
 	}
 	
+	public int getQtdCompromissos() {
+		return compromissos.size();
+	}
+	
 	public void addCompromisso(Compromisso compromisso) {
 		for (Compromisso c: compromissos) {
 			if (c.getHora().equals(compromisso.getHora())) {
@@ -29,6 +33,9 @@ public class DataAgenda {
 	}
 	
 	public int getTempoMedio() {
+		if (compromissos.isEmpty()) {
+			return 0;
+		}
 		int total = 0;
 		for (Compromisso c: compromissos) {
 			total += c.getTempo();
@@ -54,5 +61,15 @@ public class DataAgenda {
 			}
 		}
 		return retorno;
+	}
+	public Compromisso getMenorCompromisso() {
+		Compromisso menor = null;
+		
+		for (Compromisso c: compromissos) {
+			if (menor == null || c.getTempo() < menor.getTempo()) {
+				menor = c;
+			}
+		}
+		return menor;
 	}
 }
