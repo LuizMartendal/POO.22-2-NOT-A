@@ -56,7 +56,7 @@ public class Vereador {
 		if (this.qtdProjApres == 0) {
 			return 0;
 		}
-		return (this.qtdProjAprov / this.qtdProjApres) * this.getIndiceTrabalho();
+		return (this.qtdProjAprov / (double)this.qtdProjApres) * this.getIndiceTrabalho();
 	}
 
 	public double getIndiceTrabalho() {
