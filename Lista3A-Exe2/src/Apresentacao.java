@@ -136,13 +136,10 @@ public class Apresentacao {
 					p.setConteudo(taConteudo.getText());
 					obraAtual.addParecer(p);
 					JOptionPane.showMessageDialog(frame, "Parecer adicionado");
-				} catch (NullPointerException npe) {
-					JOptionPane.showMessageDialog(frame, "Cadastre primeiro uma obra");
-					tfTitulo.requestFocus();
-				} catch (DateTimeParseException dtpe) {
-					JOptionPane.showMessageDialog(frame, "Data com formato inválido");
+				} catch (DateTimeParseException exc) {
+					JOptionPane.showMessageDialog(frame,"Data com formato inválido. Redigite.");
 				} catch (IllegalArgumentException iae) {
-					JOptionPane.showMessageDialog(frame, iae.getMessage());
+					JOptionPane.showMessageDialog(frame,iae.getMessage());
 				}
 			}
 		});

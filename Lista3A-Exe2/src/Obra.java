@@ -1,5 +1,5 @@
 
-public class Obra {
+public class Obra { 
 	private String autor;
 	private String titulo;
 	private Parecer[] pareceres = new Parecer[3];
@@ -18,14 +18,13 @@ public class Obra {
 		this.titulo = titulo;
 	}
 	
-	public boolean addParecer(Parecer p) {
+	public void addParecer(Parecer p) {
 		if (indice < pareceres.length) {
 			pareceres[indice] = p;
 			indice++;
-			return true;
 		}
 		else {
-			return false;
+			throw new IllegalArgumentException("Quantidade máxima de pareceres alcançada: 3");
 		}
 	}
 
