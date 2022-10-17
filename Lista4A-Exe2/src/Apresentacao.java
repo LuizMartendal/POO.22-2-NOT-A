@@ -21,7 +21,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class Apresentacao {
+public class Apresentacao   {
 
 	private JFrame frame;
 	private JTextField tfNome;
@@ -146,7 +146,7 @@ public class Apresentacao {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String str = "Lista dos alunos\\n";
-				
+				alunos.sort(null);
 				for (Aluno a : alunos) {
 					str += "\n" + a.mostra(); // polimorfismo
 				}

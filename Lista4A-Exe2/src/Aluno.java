@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.time.Period;
 
-public abstract class Aluno {
+public abstract class Aluno implements Comparable<Aluno> {
     private String nome;
     private LocalDate dataNascimento;
 
@@ -43,6 +43,11 @@ public abstract class Aluno {
 	@Override
 	protected void finalize() throws Throwable {
 		System.out.println("Passando destrutor de Aluno:"+this.nome);
+	}
+
+	@Override
+	public int compareTo(Aluno outro) {
+		return this.nome.compareTo(outro.getNome());
 	}
     
     

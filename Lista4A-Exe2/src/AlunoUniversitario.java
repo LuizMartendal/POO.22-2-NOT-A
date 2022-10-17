@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.util.HashMap;
 
-public class AlunoUniversitario extends Aluno {
+public class AlunoUniversitario extends Aluno  {
 	// atributo de classe
 	private static HashMap<Character, String> formasIngresso = new HashMap<Character, String>() {
 		{

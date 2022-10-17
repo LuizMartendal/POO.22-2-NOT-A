@@ -1,4 +1,4 @@
-public class Curso {
+public class Curso  {
     private String nome;
     private String sigla;
 
