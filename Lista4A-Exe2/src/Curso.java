@@ -1,4 +1,6 @@
-public class Curso  {
+import java.io.Serializable;
+
+public class Curso implements Serializable{
     private String nome;
     private String sigla;
 

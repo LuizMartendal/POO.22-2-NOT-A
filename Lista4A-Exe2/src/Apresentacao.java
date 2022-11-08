@@ -2,6 +2,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JComboBox;
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,6 +21,12 @@ import java.util.HashMap;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class Apresentacao   {
 
@@ -57,6 +64,27 @@ public class Apresentacao   {
 	 */
 	public Apresentacao() {
 		initialize();
+		lerArquivo();
+	}
+
+	private void lerArquivo() {
+		
+		try (FileInputStream fis= new FileInputStream("DadosSalvos.dat");
+				ObjectInputStream ois = new ObjectInputStream(fis);) {
+			alunos = (ArrayList<Aluno>)ois.readObject();
+			cbCursos.setModel((ComboBoxModel<Curso>) ois.readObject());
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null,"Primeira execução. Arquivo ainda não existe.");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 	/**
@@ -216,5 +244,25 @@ public class Apresentacao   {
 		cbCursos = new JComboBox();
 		cbCursos.setBounds(289, 172, 137, 22);
 		frame.getContentPane().add(cbCursos);
+		
+		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try (FileOutputStream fos = new FileOutputStream("DadosSalvos.dat");
+						ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+					oos.writeObject(alunos);
+					oos.writeObject(cbCursos.getModel());
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				
+			}
+		});
+		btnSalvar.setBounds(498, 201, 89, 23);
+		frame.getContentPane().add(btnSalvar);
 	}
 }
