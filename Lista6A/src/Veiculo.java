@@ -7,10 +7,10 @@ public class Veiculo implements Comparable<Veiculo>{
 	
 	public Veiculo(String placa, String modelo, int ano, String proprietario) {
 		super();
-		this.placa = placa;
-		this.modelo = modelo;
-		this.ano = ano;
-		this.proprietario = proprietario;
+		this.setPlaca(placa);
+		this.setModelo(modelo);
+		this.setAno(ano);
+		this.setProprietario(proprietario);
 	}
 
 	public String getPlaca() {
